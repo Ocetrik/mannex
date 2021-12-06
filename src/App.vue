@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+  <Home />
   <component :is="layout">
     <router-view/>
   </component>
@@ -8,6 +9,8 @@
 
 <script>
 import MainLayout from "@/layouts/MainLayout"
+import Home from "@/views/Home"
+
 export default {
   computed: {
     layout() {
@@ -15,11 +18,11 @@ export default {
     }
   },
   components: {
-    MainLayout
+    MainLayout, Home
   }
 }
 </script>
 
 <style lang="scss">
-
+@import 'assets/index.css'
 </style>
