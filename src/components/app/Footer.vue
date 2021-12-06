@@ -51,16 +51,7 @@ export default {
 
 <style scoped lang="scss">
 
-.item {
-   font-family: 'Gilroy-Regular';
-   font-style: normal;
-   font-weight: normal;
-   font-size: 18px;
-   line-height: 21px;
-   color: #434242;
-   white-space: nowrap;
 
-}
 .title{
    font-family: 'Gilroy-Semibold';
    font-style: normal;
@@ -110,6 +101,7 @@ export default {
 .row-account {
    margin-right: 57%;
 }
+
 .row-contacts {
 }
 .content-text {
