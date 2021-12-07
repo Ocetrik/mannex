@@ -5,12 +5,14 @@
 </template>
 
 <script>
-import Catalog from "@/components/app/Catalog"
+import Catalog from '@/components/Catalog/Catalog.vue'
+
 
 export default {
   name: 'Home',
   components: {
     Catalog
+    
   }
 }
 </script>
