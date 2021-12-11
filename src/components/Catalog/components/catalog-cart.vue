@@ -2,11 +2,11 @@
    <div class="catalog-cart">
       <div class="catalog-cart__logo"><img src="~@/static/product.png" alt=""></div>
       <div class="catalog-cart__title">{{title}}</div>
-      <div class="catalog-cart__description text">Шина летняя "Primacy 3 GRNX <br> 205/55R16 91V"</div>
+      <div class="catalog-cart__description text">{{description}}</div>
       <div class="catalog-cart__control">
          <button class="catalog-cart__price title">{{summPrice}}р.</button>
-         <div class="catalog-cart__number"><img src="~@/static/minus.svg" alt=""> {{numberOfProducts}} <img @click='increaseProduct' src="~@/static/plus.svg" alt=""></div>
-         <button class="catalog-cart__busket"><img src="~@/static/busket.png" alt=""></button>
+         <div class="catalog-cart__number"><img @click="reduceProduct" src="~@/static/minus.svg" alt=""> {{numberOfProducts}} <img @click='increaseProduct' src="~@/static/plus.svg" alt=""></div>
+         <button class="catalog-cart__busket"><router-link to="/cart"><img src="~@/static/busket.png" alt=""></router-link></button>
       </div>
    </div>
 </template>
@@ -19,10 +19,15 @@ export default {
          validator: (val) => typeof val === 'string',
          default: 'Michelin' 
       },
+      description: {
+         type: String,
+         validator: (val) => typeof val === 'string',
+         default: 'Шина летняя "Primacy 3 GRNX 205/55R16 91V"'
+      },
       price: {
          type: Number,
          validator: val => val >= 0,
-         default: 990
+         default: 990,
       }
    },
    data: () => ({
@@ -30,8 +35,15 @@ export default {
    }),
    methods: {
       increaseProduct() {
-         this.numberOfProducts=this.numberOfProducts+1
+         this.numberOfProducts=this.numberOfProducts + 1
+      },
+      reduceProduct() {
+         if (this.numberOfProducts === 0) {
+            return
+         }
+         this.numberOfProducts=this.numberOfProducts - 1
       }
+      
    },
    computed: {
       summPrice() {
@@ -57,8 +69,11 @@ export default {
       line-height: 44px;
       margin-top: 21px;
    }
+   .text{
+   }
    .catalog-cart__description {
       margin-top: 5px;
+      max-width: 255px;
    }
    .catalog-cart__control {
       margin-top: 30px;

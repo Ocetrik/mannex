@@ -16,54 +16,99 @@
         </button>
       </div>
       <div class="catalog-content">
-        <div class="catalog-content__filter">
-          <div class="filter-content">
-            <div class="filter__title title">Тип</div>
-            <div class="filter__select">
-              <select class="select-text item">
-                <option>Летние</option>
-                <option>Зимние</option>
-              </select>
-            </div>
-            <div class="filter__title title">Производитель</div>
-            <div class="filter__select">
-              <select class="select-text item">
-                <option>Не выбрано</option>
-              </select>
-            </div>
-            <div class="filter__title title">Размер</div>
-            <div class="filter__select">
-              <select class="select-text item">
-                <option>Выбраны все</option>
-              </select>
-            </div>
-            <div class="filter__title title">Диаметр</div>
-            <div class="filter__select">
-              <select class="select-text item">
-                <option>Выбраны все</option>
-              </select>
-            </div>
-            <button class="filter__btn">Подобрать</button>
-          </div>
+        <div class="wrapper">
+          <Selector
+            title="Тип"
+            :options="typeOptions"
+            :typeSelected="selected"
+            v-model="selectTypeOption"
+          />
+          <Selector
+            title="Производитель"
+            :options="brandOptions"
+            :brandSelected="selected"
+            v-model="selectBrandOption"
+          />
+          <Selector
+            title="Размер"
+            :options="sizeOptions"
+            :sizeSelected="selected"
+            v-model="selectSizeOption"
+          />
+          <Selector
+            title="Диаметр"
+            :options="diameterOptions"
+            :diameterSelected="selected"
+            v-model="selectDiameterOption"
+            @input="optionSelect"
+          />
+          <button class="selector__btn">Подобрать</button>
         </div>
         <div class="catalog-content__menu">
-          <catalog-cart :title="i.title" :key="i" v-for="i in products" />
+          <catalog-cart
+            :description="i.description"
+            :title="i.title"
+            :key="i"
+            v-for="i in carts"
+          />
         </div>
       </div>
-      <div class="catalog-pages">1 2 3 4 228</div>
+      <div class="catalog-pages">
+        <div
+          v-for="(pagesItem, key) in new Array(numberOfPages)"
+          :key="key"
+          class="catalog-pages__item"
+          :class="openPage === key ? 'active' : ''"
+          @click="openPage = key"
+        >
+          {{ key }}
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import CatalogCart from "@/components/Catalog/components/catalog-cart.vue";
+import Selector from "@/components/Catalog/components/Selector.vue";
 export default {
   name: "catalog",
   components: {
     CatalogCart,
+    Selector,
   },
   data: () => ({
-    products: [{ title: "opjfg" }, { title: "iohgoir" }],
+    openPage: 0,
+    selected: '',
+
+    selectTypeOption: "Летние",
+    selectBrandOption: "Выбраны все",
+    selectSizeOption: "Выбраны все",
+    selectDiameterOption: "Выбраны все",
+
+    typeOptions: [
+      { name: "Летние", value: 1 },
+      { name: "Зимние", value: 2 },
+    ],
+    brandOptions: [
+      { name: "Выбраны все" },
+      { name: "Michellin", value: 3 },
+      { name: "Pirelli", value: 4 },
+    ],
+    sizeOptions: [{ name: "Выбраны все" }, { name: "20" }],
+    diameterOptions: [{ name: "Выбраны все" }, { name: "15" }],
+    products: [
+      {
+        title: "Michelin",
+        description: 'Шина летняя "Primacy 3 GRNX 205/55R16 91V"',
+      },
+      { title: "Pirelli", description: "Другая шина" },
+      { title: "Goodyear" },
+      { title: "Continental" },
+      { title: "Bridgestone" },
+      { title: "Nokian" },
+      { title: "Hankook" },
+    ],
     typesProduct: [
       "Шины",
       "Диски",
@@ -77,30 +122,60 @@ export default {
     selectedType: "Шины",
   }),
   methods: {
+    optionSelect(options) {
+      this.selected = options.name;
+    },
     setSelectedType(type) {
       this.selectedType = type;
       this.products = this.getProduct(type);
     },
     getProduct(type) {
       if (type === "Шины") {
-        return [{ title: "opjfg" }, { title: "iohgoir" }];
-      }
-      if (type === "Диски") {
         return [
-          {
-            title: "234ter",
-          },
+          { title: "Michelin" },
+          { title: "Pirelli" },
+          { title: "Goodyear" },
+          { title: "Continental" },
+          { title: "Bridgestone" },
+          { title: "Nokian" },
+          { title: "Hankook" },
         ];
       }
+      if (type === "Диски") {
+        return [{ title: "Диск", description: "Описание диска" }];
+      }
+      if (type === "Аксессуары") {
+        return [{ title: "Аксессуар", description: "Описание аксессуара" }];
+      }
       return [];
+    },
+  },
+  computed: {
+    carts: function () {
+      return this.products.slice(this.openPages*6 || 0, 6);
+    },
+    numberOfPages() {
+      return Math.ceil(this.products.length / 6);
     },
   },
 };
 </script>
 
-<style scoped>
+<style >
+.catalog-pages__item{
+  padding: 10px 17px;
+}
+.catalog-pages__item.active {
+
+  background: #4ba9ff;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .navigator__item.active {
   background: #4ba9ff;
+  color: #ffffff;
 }
 .bgimg-1 {
   position: absolute;
@@ -110,6 +185,7 @@ export default {
 .bgimg-2 {
   position: absolute;
   z-index: -1;
+  bottom: -230px;
 }
 .catalog {
   position: relative;
@@ -117,6 +193,7 @@ export default {
 .content-container {
   max-width: 1440px;
   margin: 0 auto;
+  padding: 0 20px;
 }
 .catalog-title {
   font-family: "Gilroy-Bold";
@@ -129,6 +206,7 @@ export default {
   display: flex;
   margin-top: 75px;
   justify-content: center;
+  flex-wrap: wrap;
 }
 .navigator__item {
   padding: 10px 25px;
@@ -138,38 +216,11 @@ export default {
   display: flex;
   margin-top: 100px;
 }
-.catalog-content__filter {
-  max-height: 600px;
-  box-shadow: 0px 10px 25px rgba(119, 119, 119, 0.2);
-}
-.filter-content {
-  margin: 0 auto;
-  padding: 0 40px;
-  padding-bottom: 63px;
-}
-.filter__title {
-  margin-top: 20px;
-}
-.filter__select {
-  margin-top: 8px;
-  border: 1px solid rgba(67, 66, 66, 0.2);
-  padding: 14px 40px;
-}
-.filter__btn {
-  font-family: "Gilroy-Bold";
-  font-style: normal;
-  font-weight: bold;
-  font-size: 20px;
-  line-height: 24px;
-  color: #ffffff;
-  padding: 20px 80px;
-  background: #4ba9ff;
-  margin-top: 40px;
-}
 .catalog-content__menu {
   margin-left: 36px;
   display: grid;
-  grid-column-gap: 36px;
+  grid-column-gap: 42px;
+  grid-row-gap: 32px;
   grid-template-columns: repeat(3, 1fr);
 }
 .catalog-pages {
@@ -182,5 +233,42 @@ export default {
   padding-bottom: 61px;
   display: flex;
   justify-content: center;
+}
+@media screen and (max-width: 1450px) {
+  .catalog-content__menu {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (max-width: 1100px) {
+  .catalog-content {
+    flex-direction: column;
+  }
+  .selector {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 30px;
+    padding: 20px 20px;
+  }
+  .bgimg-1 {
+    display: none;
+  }
+  .bgimg-2 {
+    display: none;
+  }
+  .selector__btn {
+    margin-top: 20px;
+  }
+}
+@media screen and (max-width: 730px) {
+  .catalog-content__menu {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .catalog-cart {
+    max-width: 325px;
+    margin: 0 auto;
+  }
+  .selector {
+    flex-direction: column;
+  }
 }
 </style>
