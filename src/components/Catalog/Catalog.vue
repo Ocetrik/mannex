@@ -16,7 +16,7 @@
         </button>
       </div>
       <div class="catalog-content">
-        <div class="wrapper">
+        <div class="selector-wrapper">
           <Selector
             title="Тип"
             :options="typeOptions"
@@ -40,9 +40,10 @@
             :options="diameterOptions"
             :diameterSelected="selected"
             v-model="selectDiameterOption"
-            @input="optionSelect"
           />
-          <button class="selector__btn">Подобрать</button>
+          <button @click="setFilteredProducts" class="selector__btn">
+            Подобрать
+          </button>
         </div>
         <div class="catalog-content__menu">
           <catalog-cart
@@ -71,6 +72,9 @@
 <script>
 import CatalogCart from "@/components/Catalog/components/catalog-cart.vue";
 import Selector from "@/components/Catalog/components/Selector.vue";
+import { STATIC_PRODUCT } from "@/data/STATIC_PRODUCT.js";
+const DEFAULT_FILTER_VALUE = "Выбраны все";
+
 export default {
   name: "catalog",
   components: {
@@ -78,37 +82,29 @@ export default {
     Selector,
   },
   data: () => ({
+    filteredProducts: STATIC_PRODUCT,
+    products: STATIC_PRODUCT,
+
     openPage: 0,
-    selected: '',
 
-    selectTypeOption: "Летние",
-    selectBrandOption: "Выбраны все",
-    selectSizeOption: "Выбраны все",
-    selectDiameterOption: "Выбраны все",
+    selected: "",
 
+    selectTypeOption: DEFAULT_FILTER_VALUE,
+    selectBrandOption: DEFAULT_FILTER_VALUE,
+    selectSizeOption: DEFAULT_FILTER_VALUE,
+    selectDiameterOption: DEFAULT_FILTER_VALUE,
     typeOptions: [
       { name: "Летние", value: 1 },
       { name: "Зимние", value: 2 },
     ],
     brandOptions: [
       { name: "Выбраны все" },
-      { name: "Michellin", value: 3 },
+      { name: "Michelin", value: 3 },
       { name: "Pirelli", value: 4 },
     ],
     sizeOptions: [{ name: "Выбраны все" }, { name: "20" }],
     diameterOptions: [{ name: "Выбраны все" }, { name: "15" }],
-    products: [
-      {
-        title: "Michelin",
-        description: 'Шина летняя "Primacy 3 GRNX 205/55R16 91V"',
-      },
-      { title: "Pirelli", description: "Другая шина" },
-      { title: "Goodyear" },
-      { title: "Continental" },
-      { title: "Bridgestone" },
-      { title: "Nokian" },
-      { title: "Hankook" },
-    ],
+
     typesProduct: [
       "Шины",
       "Диски",
@@ -122,8 +118,20 @@ export default {
     selectedType: "Шины",
   }),
   methods: {
-    optionSelect(options) {
-      this.selected = options.name;
+    setFilteredProducts() {
+      const {
+        selectTypeOption,
+        selectBrandOption,
+        selectSizeOption,
+        selectDiameterOption,
+      } = this;
+      let newListProducts = [];
+      newListProducts = this.products.filter((item) =>
+        selectTypeOption === DEFAULT_FILTER_VALUE
+          ? true
+          : item.season === selectTypeOption
+      );
+      this.filteredProducts = newListProducts;
     },
     setSelectedType(type) {
       this.selectedType = type;
@@ -151,8 +159,15 @@ export default {
     },
   },
   computed: {
-    carts: function () {
-      return this.products.slice(this.openPages*6 || 0, 6);
+    carts() {
+      if (this.openPage === 0) {
+        return this.filteredProducts.slice(0, 6);
+      } else {
+        return this.filteredProducts.slice(
+          this.openPage * 6,
+          this.openPage * 6 + 6
+        );
+      }
     },
     numberOfPages() {
       return Math.ceil(this.products.length / 6);
@@ -162,11 +177,10 @@ export default {
 </script>
 
 <style >
-.catalog-pages__item{
+.catalog-pages__item {
   padding: 10px 17px;
 }
 .catalog-pages__item.active {
-
   background: #4ba9ff;
   color: #ffffff;
   display: flex;
@@ -246,8 +260,8 @@ export default {
   .selector {
     display: flex;
     gap: 30px;
-    margin-bottom: 30px;
     padding: 20px 20px;
+    flex-direction: column;
   }
   .bgimg-1 {
     display: none;
@@ -255,8 +269,13 @@ export default {
   .bgimg-2 {
     display: none;
   }
-  .selector__btn {
-    margin-top: 20px;
+  .selector__btn{
+    margin-left: 20px;
+    display: flex;
+}
+  .selector-wrapper{
+    max-height: 1000px;
+    margin-bottom: 60px;
   }
 }
 @media screen and (max-width: 730px) {

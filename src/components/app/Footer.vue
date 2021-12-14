@@ -110,5 +110,6 @@ export default {
     flex-direction: column;
     padding: 20px;
   }
+
 }
 </style>

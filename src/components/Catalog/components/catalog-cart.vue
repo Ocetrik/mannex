@@ -59,8 +59,6 @@ export default {
       padding: 30px 35px 28px 32px;
       max-height: 473px;
    }
-   .product__logo {
-   }
    .catalog-cart__title {
       font-family: 'Gilroy-Bold';
       font-style: normal;
@@ -68,8 +66,6 @@ export default {
       font-size: 36px;
       line-height: 44px;
       margin-top: 21px;
-   }
-   .text{
    }
    .catalog-cart__description {
       margin-top: 5px;

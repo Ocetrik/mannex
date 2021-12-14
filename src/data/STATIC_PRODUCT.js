@@ -1,0 +1,36 @@
+export const STATIC_PRODUCT = [
+   {
+     title: "Michelin",
+      description: 'Шина летняя "Primacy 3 GRNX 205/55R16 91V"',
+      size: 15,
+      diameter: 15,
+      season: 'Летние'
+   },
+   { title: "Pirelli", description: "Другая шина", size: 16,
+   diameter: 17, season: 'Зимние' },
+   { title: "Goodyear" },
+   { title: "Continental" },
+   { title: "Bridgestone" },
+   { title: "Nokian" },
+   { title: "Hankook" },
+   {
+     title: "Michelin",
+     description: 'Шина летняя "Primacy 3 GRNX 205/55R16 91V"',
+   },
+   { title: "Pirelli", description: "Другая шина" },
+   { title: "Goodyear" },
+   { title: "Continental" },
+   { title: "Bridgestone" },
+   { title: "Nokian" },
+   { title: "Hankook" },
+   {
+     title: "Michelin",
+     description: 'Шина летняя "Primacy 3 GRNX 205/55R16 91V"',
+   },
+   { title: "Pirelli", description: "Другая шина" },
+   { title: "Goodyear" },
+   { title: "Continental" },
+   { title: "Bridgestone" },
+   { title: "Nokian" },
+   { title: "Hankook" },
+ ]

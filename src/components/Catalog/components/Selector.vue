@@ -43,7 +43,7 @@ export default {
 </script>
 
 <style lang="scss">
-.wrapper {
+.selector-wrapper {
   box-shadow: 0px 10px 25px rgba(119, 119, 119, 0.2);
   padding: 0 40px;
   max-height: 600px;
@@ -94,5 +94,8 @@ export default {
     align-items: center;
     padding-left: 40px;
   }
+}
+@media screen and (max-width: 1100px) {
+  
 }
 </style>
