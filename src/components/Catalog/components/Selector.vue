@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  name: "Filter",
+  name: "Selector",
   props: {
     value: {type: String},
     options: {

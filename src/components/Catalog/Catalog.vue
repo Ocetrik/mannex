@@ -9,8 +9,8 @@
           class="navigator__item text"
           @click="setSelectedType(i)"
           :class="selectedType === i ? 'active' : ''"
-          :key="i"
-          v-for="i in typesProduct"
+          :key="key"
+          v-for="(i, key) in typesProduct"
         >
           {{ i }}
         </button>
@@ -49,8 +49,8 @@
           <catalog-cart
             :description="i.description"
             :title="i.title"
-            :key="i"
-            v-for="i in carts"
+            :key="key"
+            v-for="(i, key) in carts"
           />
         </div>
       </div>
@@ -94,16 +94,17 @@ export default {
     selectSizeOption: DEFAULT_FILTER_VALUE,
     selectDiameterOption: DEFAULT_FILTER_VALUE,
     typeOptions: [
-      { name: "Летние", value: 1 },
-      { name: "Зимние", value: 2 },
+      { name: "Выбраны все" },
+      { name: "Летние"},
+      { name: "Зимние"},
     ],
     brandOptions: [
       { name: "Выбраны все" },
-      { name: "Michelin", value: 3 },
-      { name: "Pirelli", value: 4 },
+      { name: "Michelin"},
+      { name: "Pirelli"},
     ],
-    sizeOptions: [{ name: "Выбраны все" }, { name: "20" }],
-    diameterOptions: [{ name: "Выбраны все" }, { name: "15" }],
+    sizeOptions: [{ name: "Выбраны все" }, { name: 20 }],
+    diameterOptions: [{ name: "Выбраны все" }, { name: 15 }],
 
     typesProduct: [
       "Шины",
@@ -126,16 +127,35 @@ export default {
         selectDiameterOption,
       } = this;
       let newListProducts = [];
-      newListProducts = this.products.filter((item) =>
-        selectTypeOption === DEFAULT_FILTER_VALUE
-          ? true
-          : item.season === selectTypeOption
+      newListProducts = this.products.filter(
+        (item) =>
+          selectTypeOption === DEFAULT_FILTER_VALUE
+            ? true
+            : item.season === selectTypeOption,
+      );
+        newListProducts = newListProducts.filter(
+        (item) =>
+          selectBrandOption === DEFAULT_FILTER_VALUE
+            ? true
+            : item.title === selectBrandOption,
+      );
+        newListProducts = newListProducts.filter(
+        (item) =>
+          selectSizeOption === DEFAULT_FILTER_VALUE
+            ? true
+            : item.size === selectSizeOption,
+      );
+        newListProducts = newListProducts.filter(
+        (item) =>
+          selectDiameterOption === DEFAULT_FILTER_VALUE
+            ? true
+            : item.diameter === selectDiameterOption,
       );
       this.filteredProducts = newListProducts;
     },
     setSelectedType(type) {
       this.selectedType = type;
-      this.products = this.getProduct(type);
+      this.filteredProducts = this.getProduct(type);
     },
     getProduct(type) {
       if (type === "Шины") {
@@ -170,7 +190,7 @@ export default {
       }
     },
     numberOfPages() {
-      return Math.ceil(this.products.length / 6);
+      return Math.ceil(this.filteredProducts.length / 6);
     },
   },
 };
@@ -269,11 +289,11 @@ export default {
   .bgimg-2 {
     display: none;
   }
-  .selector__btn{
+  .selector__btn {
     margin-left: 20px;
     display: flex;
-}
-  .selector-wrapper{
+  }
+  .selector-wrapper {
     max-height: 1000px;
     margin-bottom: 60px;
   }

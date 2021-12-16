@@ -10,6 +10,7 @@
 <script>
 import MainLayout from "@/layouts/MainLayout"
 import Home from "@/views/Home"
+import EmptyLayout from '@/layouts/EmptyLayout'
 
 export default {
   computed: {
@@ -18,7 +19,7 @@ export default {
     }
   },
   components: {
-    MainLayout, Home
+    MainLayout, Home, EmptyLayout
   }
 }
 </script>
