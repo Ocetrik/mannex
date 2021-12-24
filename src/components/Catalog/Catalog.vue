@@ -1,9 +1,10 @@
 <template>
   <div class="catalog">
-    <div class="bgimg-1"><img src="@/static/catalogbg.png" alt="" /></div>
+    <!-- <div class="bgimg-1"><img src="@/static/catalogbg.png" alt="" /></div> -->
     <div class="bgimg-2"><img src="@/static/catalogbg-2.png" alt="" /></div>
     <div class="content-container">
       <div class="catalog-title">Каталог</div>
+      <!-- Выбор категории товаров -->
       <div class="catalog-navigator">
         <button
           class="navigator__item text"
@@ -15,6 +16,7 @@
           {{ i }}
         </button>
       </div>
+      <!-- Селектор товаров по характеристикам -->
       <div class="catalog-content">
         <div class="selector-wrapper">
           <Selector
@@ -45,15 +47,20 @@
             Подобрать
           </button>
         </div>
+        <!-- Карточка товара -->
         <div class="catalog-content__menu">
           <catalog-cart
+            :product="i"
             :description="i.description"
             :title="i.title"
+            :img="i.img"
             :key="key"
             v-for="(i, key) in carts"
           />
         </div>
       </div>
+      <Basket />
+      <!-- Список страниц -->
       <div class="catalog-pages">
         <div
           v-for="(pagesItem, key) in new Array(numberOfPages)"
@@ -73,6 +80,7 @@
 import CatalogCart from "@/components/Catalog/components/catalog-cart.vue";
 import Selector from "@/components/Catalog/components/Selector.vue";
 import { STATIC_PRODUCT } from "@/data/STATIC_PRODUCT.js";
+import Basket from '../Busket/Basket.vue';
 const DEFAULT_FILTER_VALUE = "Выбраны все";
 
 export default {
@@ -80,6 +88,7 @@ export default {
   components: {
     CatalogCart,
     Selector,
+    Basket,
   },
   data: () => ({
     filteredProducts: STATIC_PRODUCT,
@@ -95,13 +104,18 @@ export default {
     selectDiameterOption: DEFAULT_FILTER_VALUE,
     typeOptions: [
       { name: "Выбраны все" },
-      { name: "Летние"},
-      { name: "Зимние"},
+      { name: "Летние" },
+      { name: "Зимние" },
     ],
     brandOptions: [
       { name: "Выбраны все" },
-      { name: "Michelin"},
-      { name: "Pirelli"},
+      { name: "Michelin" },
+      { name: "Pirelli" },
+      { name: 'Goodyear'},
+      { name: 'Continental'},
+      { name: 'Bridgestone'},
+      { name: 'Nokian'},
+      { name: 'Hankook'},
     ],
     sizeOptions: [{ name: "Выбраны все" }, { name: 20 }],
     diameterOptions: [{ name: "Выбраны все" }, { name: 15 }],
@@ -127,29 +141,25 @@ export default {
         selectDiameterOption,
       } = this;
       let newListProducts = [];
-      newListProducts = this.products.filter(
-        (item) =>
-          selectTypeOption === DEFAULT_FILTER_VALUE
-            ? true
-            : item.season === selectTypeOption,
+      newListProducts = this.products.filter((item) =>
+        selectTypeOption === DEFAULT_FILTER_VALUE
+          ? true
+          : item.season === selectTypeOption
       );
-        newListProducts = newListProducts.filter(
-        (item) =>
-          selectBrandOption === DEFAULT_FILTER_VALUE
-            ? true
-            : item.title === selectBrandOption,
+      newListProducts = newListProducts.filter((item) =>
+        selectBrandOption === DEFAULT_FILTER_VALUE
+          ? true
+          : item.title === selectBrandOption
       );
-        newListProducts = newListProducts.filter(
-        (item) =>
-          selectSizeOption === DEFAULT_FILTER_VALUE
-            ? true
-            : item.size === selectSizeOption,
+      newListProducts = newListProducts.filter((item) =>
+        selectSizeOption === DEFAULT_FILTER_VALUE
+          ? true
+          : item.size === selectSizeOption
       );
-        newListProducts = newListProducts.filter(
-        (item) =>
-          selectDiameterOption === DEFAULT_FILTER_VALUE
-            ? true
-            : item.diameter === selectDiameterOption,
+      newListProducts = newListProducts.filter((item) =>
+        selectDiameterOption === DEFAULT_FILTER_VALUE
+          ? true
+          : item.diameter === selectDiameterOption
       );
       this.filteredProducts = newListProducts;
     },
@@ -159,18 +169,11 @@ export default {
     },
     getProduct(type) {
       if (type === "Шины") {
-        return [
-          { title: "Michelin" },
-          { title: "Pirelli" },
-          { title: "Goodyear" },
-          { title: "Continental" },
-          { title: "Bridgestone" },
-          { title: "Nokian" },
-          { title: "Hankook" },
-        ];
+        return STATIC_PRODUCT;
       }
       if (type === "Диски") {
-        return [{ title: "Диск", description: "Описание диска" }];
+        return [{ title: "Диск", description: "Описание диска", img: require('@/static/disk.jpg')
+ }];
       }
       if (type === "Аксессуары") {
         return [{ title: "Аксессуар", description: "Описание аксессуара" }];
@@ -196,7 +199,10 @@ export default {
 };
 </script>
 
-<style >
+<style lang='scss'>
+.catalog{
+  margin-top: 150px;
+}
 .catalog-pages__item {
   padding: 10px 17px;
 }
@@ -246,6 +252,7 @@ export default {
   padding: 10px 25px;
   background: #ffffff;
 }
+
 .catalog-content {
   display: flex;
   margin-top: 100px;

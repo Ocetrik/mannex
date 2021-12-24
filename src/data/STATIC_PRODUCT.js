@@ -1,10 +1,11 @@
 export const STATIC_PRODUCT = [
   {
     title: "Michelin",
-    description: 'Шина летняя "Primacy 3 GRNX 205/55R16 91V"',
+    description: 'Шина летняя Michelin"',
     size: 20,
     diameter: 15,
-    season: 'Летние'
+    season: 'Летние',
+    img: require('@/static/product.png')
   },
   {
     title: "Pirelli", description: "Шина зимняя Pirelli", size: 20,
@@ -36,3 +37,4 @@ export const STATIC_PRODUCT = [
   { title: "Nokian" },
   { title: "Hankook" },
 ]
+  

@@ -53,3 +53,17 @@
 	font-weight: 700;
 	font-style: normal;
 }
+@font-face {
+	font-family: 'Montserrat-Light';
+	src: url('~@/fonts/Montserrat-Light.eot');
+	src: local('☺'), url('~@/fonts/Montserrat-Light.woff') format('woff'), url('~@/fonts/Montserrat-Light.ttf') format('truetype'), url('~@/fonts/Montserrat-Light.svg') format('svg');
+	font-weight: 300;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Montserrat-SemiBold';
+	src: url('~@/fonts/Montserrat-SemiBold.eot');
+	src: local('☺'), url('~@/fonts/Montserrat-SemiBold.woff') format('woff'), url('~@/fonts/Montserrat-SemiBold.ttf') format('truetype'), url('~@/fonts/Montserrat-SemiBold.svg') format('svg');
+	font-weight: 600;
+	font-style: normal;
+}

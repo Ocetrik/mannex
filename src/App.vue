@@ -1,25 +1,25 @@
 <template>
   <div id="app">
   <Home />
-  <component :is="layout">
-    <router-view/>
-  </component>
+  <!-- <component :is="layout"> -->
+    <!-- <router-view/> -->
+  <!-- </component> -->
   </div>
 </template>
 
 <script>
-import MainLayout from "@/layouts/MainLayout"
+// import MainLayout from "@/layouts/MainLayout"
+// import EmptyLayout from '@/layouts/EmptyLayout'
 import Home from "@/views/Home"
-import EmptyLayout from '@/layouts/EmptyLayout'
 
 export default {
   computed: {
-    layout() {
-      return (this.$route.meta.layout || 'empty') + '-layout'
-    }
+    // layout() {
+    //   return (this.$route.meta.layout || 'empty') + '-layout'
+    // }
   },
   components: {
-    MainLayout, Home, EmptyLayout
+    Home
   }
 }
 </script>
