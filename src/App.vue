@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-  <Home />
-  <!-- <component :is="layout"> -->
-    <!-- <router-view/> -->
-  <!-- </component> -->
+  <!-- <Home />
+  <Basket /> -->
+    <router-view/>
+
   </div>
 </template>
 
@@ -11,6 +11,7 @@
 // import MainLayout from "@/layouts/MainLayout"
 // import EmptyLayout from '@/layouts/EmptyLayout'
 import Home from "@/views/Home"
+import Basket from '@/views/Basket.vue'
 
 export default {
   computed: {
@@ -19,7 +20,8 @@ export default {
     // }
   },
   components: {
-    Home
+    // Home,
+    // Basket
   }
 }
 </script>

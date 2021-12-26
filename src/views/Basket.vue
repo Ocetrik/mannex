@@ -9,11 +9,12 @@
       :title="item.title"
       :img="item.img"
     />
+    <p v-if="!item">Нет продуктов</p>
   </div>
 </template>
 
 <script>
-import catalogCart from "../Catalog/components/catalog-cart.vue";
+import catalogCart from "@/components/Catalog/components/catalog-cart.vue";
 export default {
   components: { catalogCart },
   data: () => ({}),
@@ -26,6 +27,9 @@ export default {
 </script>
 
 <style>
+p{
+  font-size: 50px;
+}
 .basket {
   margin: 0 auto;
   display: flex;

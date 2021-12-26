@@ -12,10 +12,10 @@
         <div class="navigator__item text">Заказы</div>
       </div>
       <div class="header-info__busket">
-        <a href="#" class="busket__logo"
+        <router-link to="/basket" class="busket__logo"
           ><img src="@/static/busket.png" alt=""
-        /></a>
-        <div class="busket__summ text">{{summPrice}}</div>
+        /></router-link>
+          <div class="busket__summ text">{{summPrice}}</div>
       </div>
       <a href="#" class="header-info__login">
         <div class="login__user">
@@ -33,11 +33,12 @@
 
 <script>
 export default {
+
   computed: {
     summPrice() {
       return this.$store.getters.GET_SUMM_PRICE
     },
-  }
+  },
 };
 </script>
 

@@ -7,12 +7,19 @@ export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
-
     {
       path: '/',
       name: 'home',
       meta: {layout: 'main'},
-      component: () => import('@/views/Home.vue')
+      component: () => import('@/views/Home.vue'),
+      props: true
+    },
+    {
+      path: '/basket',
+      name: 'basket',
+      meta: {layout: 'main'},
+      component: () => import('@/views/Basket.vue'),
+      props: true
     },
 
   ]

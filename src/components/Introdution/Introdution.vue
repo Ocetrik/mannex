@@ -11,7 +11,8 @@
         </div>
       </div>
       <div class="introdution__picture">
-        <img src="@/static/intro-product.png" alt="" />
+        <introSlider
+        :slider_data="sliderItems" />
       </div>
     </div>
     <div class="introdution-buttons">
@@ -27,7 +28,20 @@
 </template>
 
 <script>
-export default {};
+import introSlider from '@/components/Introdution/Slider/intro-slider.vue';
+
+export default {
+  components: { 
+    introSlider
+    },
+  name: 'Introdution',
+    data: () => ({
+    sliderItems: [
+      {id: 1, name: 'Шины', img:'@/static/intro-product.png'},
+      {id: 2, name: 'Диски', img:'@/static/disk.jpg'}
+    ]
+  }),
+};
 </script>
 
 <style lang='scss' scoped>

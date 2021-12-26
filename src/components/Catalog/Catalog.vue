@@ -59,7 +59,6 @@
           />
         </div>
       </div>
-      <Basket />
       <!-- Список страниц -->
       <div class="catalog-pages">
         <div
@@ -80,7 +79,6 @@
 import CatalogCart from "@/components/Catalog/components/catalog-cart.vue";
 import Selector from "@/components/Catalog/components/Selector.vue";
 import { STATIC_PRODUCT } from "@/data/STATIC_PRODUCT.js";
-import Basket from '../Busket/Basket.vue';
 const DEFAULT_FILTER_VALUE = "Выбраны все";
 
 export default {
@@ -88,7 +86,6 @@ export default {
   components: {
     CatalogCart,
     Selector,
-    Basket,
   },
   data: () => ({
     filteredProducts: STATIC_PRODUCT,

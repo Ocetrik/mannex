@@ -12,7 +12,7 @@
 import Catalog from '@/components/Catalog/Catalog.vue'
 import CompanyInfo from '@/components/company-info/company-info.vue'
 import Introdution from '@/components/Introdution/Introdution.vue'
-import Header from '@/components/app/Header.vue'
+import Header from '@/components/Header/Header.vue'
 import Footer from '@/components/app/Footer.vue'
 
 

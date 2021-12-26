@@ -8,7 +8,7 @@
       <div class="catalog-cart__number">
         <img @click="reduceProduct" src="~@/static/minus.svg" alt="" />
         {{ numberOfProducts }}
-        <img @click="increaseProduct" src="~@/static/plus.svg" alt="" />
+        <img @click="increaseProduct"  src="~@/static/plus.svg" alt="" />
       </div>
       <button @click="addProduct" class="catalog-cart__busket">
         <img src="~@/static/busket.png" alt="" />
