@@ -2,7 +2,7 @@
   <div class="header">
     <div class="header-info">
       <div class="header-info__picture">
-        <a href="#"><img src="@/static/header-logo.png" alt="" /></a>
+        <router-link to="/"><img src="@/static/header-logo.png" alt="" /></router-link>
       </div>
       <div class="header-info__navigator">
         <div class="navigator__item text">Главная</div>
@@ -23,6 +23,9 @@
         </div>
         <div class="login__btn text">Войти</div>
       </a>
+      <div class="header-info__burger">
+        <span></span>
+      </div>
     </div>
     <div class="header-search">
       <input class="header-search__text" placeholder="Поиск по артикулу" type="text" />
@@ -107,5 +110,48 @@ export default {
   padding: 13px 48px;
   color: #ffffff;
   font-weight: 500;
+}
+@media screen and (max-width: 1100px) {
+  .header-info__navigator{
+    display: none;
+  }
+  .header-info__burger{
+       z-index: 5;
+   position: relative;
+   width: 30px;
+   height: 16px;
+   cursor: pointer;
+   right: 17px;
+   top: 26px;
+   span,
+   &::before,
+   &::after{
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 10%;
+      transition: all 0.3s ease 0s;
+      background: #000000;
+   }
+   &::before,
+   &::after{
+      content:"";
+   }
+   &::before{
+      top: 0;
+   }
+   &::after{
+      bottom: 0;
+   }
+   span{
+      top: 50%;
+      transform: scale(1) translate(0px, -50%);
+   }
+  }
+  .header-info__busket{
+  }
+  .header-info__login{
+    
+  }
 }
 </style>

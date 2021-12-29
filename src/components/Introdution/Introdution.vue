@@ -115,4 +115,18 @@ export default {
     border-radius: 15px;
   }
 }
+@media screen and (max-width: 1000px) {
+  .introdution-buttons{
+    flex-direction: column;
+    max-width: 470px;
+    margin: 0 auto;
+    margin-top: 50px;
+  }
+}
+@media screen and (max-width: 750px) {
+  .catalog__text{
+    font-size: 50px;
+    line-height: 60px;
+  }  
+}
 </style>

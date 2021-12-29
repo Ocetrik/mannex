@@ -36,7 +36,7 @@ export default {};
 </script>
 
 <style lang="scss" scoped>
-.company-info{
+.company-info {
 }
 .wrapper {
   display: flex;
@@ -44,10 +44,10 @@ export default {};
 }
 .company-info--information {
   max-width: 800px;
-   margin-left: auto;
+  margin-left: auto;
 }
-.company-info--picture{
-   padding-top: 100px;
+.company-info--picture {
+  margin-top: 100px;
 }
 .information-title {
   font-family: "Gilroy-Bold";
@@ -74,5 +74,27 @@ export default {};
   font-size: 24px;
   line-height: 29px;
   margin-top: 53px;
+}
+@media screen and (max-width: 1300px) {
+  .wrapper {
+    flex-direction: column;
+  }
+  .company-info--information {
+    margin: 0 auto;
+  }
+  .company-info--picture {
+    margin: 0 auto;
+    margin-top: 50px;
+  }
+}
+@media screen and (max-width: 850px){
+  .company-info--picture{
+    display: none;
+  }
+}
+@media screen and (max-width: 750px) {
+  .text{
+    font-size: 18px;
+  }  
 }
 </style>
