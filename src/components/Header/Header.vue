@@ -36,12 +36,13 @@
 
 <script>
 export default {
-
   computed: {
     summPrice() {
       return this.$store.getters.GET_SUMM_PRICE
     },
   },
+  methods: {
+  }
 };
 </script>
 
