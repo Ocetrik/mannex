@@ -99,6 +99,7 @@ export default {
     selectBrandOption: DEFAULT_FILTER_VALUE,
     selectSizeOption: DEFAULT_FILTER_VALUE,
     selectDiameterOption: DEFAULT_FILTER_VALUE,
+
     typeOptions: [
       { name: "Выбраны все" },
       { name: "Летние" },

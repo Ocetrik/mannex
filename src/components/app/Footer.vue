@@ -24,7 +24,7 @@
       <footer-column
         title="Аккаунт"
         :items="{
-          'Корзина':'/',
+          'Корзина': ROUTER_PATH.basket,
           'Баланс':'/',
           'Мои заказы':'/',
           'Запрос продавцу':'/',
@@ -47,11 +47,16 @@
 </template>
 
 <script>
+import ROUTER_PATH from "@/data/ROUTER_PATH.js"
 import FooterColumn from "@/components/Footer/components/footer-column.vue";
+
 export default {
   components: {
     FooterColumn,
   },
+  data: () => ({
+    ROUTER_PATH
+  })
 };
 </script>
 

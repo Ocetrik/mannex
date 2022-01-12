@@ -2,7 +2,9 @@
   <div class="header">
     <div class="header-info">
       <div class="header-info__picture">
-        <router-link to="/"><img src="@/static/header-logo.png" alt="" /></router-link>
+        <router-link to="/"
+          ><img src="@/static/header-logo.png" alt=""
+        /></router-link>
       </div>
       <div class="header-info__navigator">
         <div class="navigator__item text">Главная</div>
@@ -15,7 +17,7 @@
         <router-link to="/basket" class="busket__logo"
           ><img src="@/static/busket.png" alt=""
         /></router-link>
-          <div class="busket__summ text">{{summPrice}}</div>
+        <div class="busket__summ text">{{ summPrice }}</div>
       </div>
       <a href="#" class="header-info__login">
         <div class="login__user">
@@ -23,26 +25,31 @@
         </div>
         <div class="login__btn text">Войти</div>
       </a>
-      <div class="header-info__burger">
-        <span></span>
+      <div :class="{ active: !isVisible }" class="burger-menu">
+        <burger-menu />
       </div>
     </div>
     <div class="header-search">
-      <input class="header-search__text" placeholder="Поиск по артикулу" type="text" />
+      <input
+        class="header-search__text"
+        placeholder="Поиск по артикулу"
+        type="text"
+      />
       <button class="header-search__send text">Поиск</button>
     </div>
   </div>
 </template>
 
 <script>
+import burgerMenu from "./Burger/burger-menu.vue";
 export default {
+  components: { burgerMenu },
   computed: {
     summPrice() {
-      return this.$store.getters.GET_SUMM_PRICE
+      return this.$store.getters.GET_SUMM_PRICE;
     },
   },
-  methods: {
-  }
+  methods: {},
 };
 </script>
 
@@ -104,7 +111,7 @@ export default {
   font-weight: normal;
   font-size: 12px;
   line-height: 14px;
-  padding-left: 40px
+  padding-left: 40px;
 }
 .header-search__send {
   background: #4ba9ff;
@@ -112,47 +119,16 @@ export default {
   color: #ffffff;
   font-weight: 500;
 }
+.burger-menu {
+  display: none;
+}
+
 @media screen and (max-width: 1100px) {
-  .header-info__navigator{
+  .header-info__navigator {
     display: none;
   }
-  .header-info__burger{
-       z-index: 5;
-   position: relative;
-   width: 30px;
-   height: 16px;
-   cursor: pointer;
-   right: 17px;
-   top: 26px;
-   span,
-   &::before,
-   &::after{
-      position: absolute;
-      left: 0;
-      width: 100%;
-      height: 10%;
-      transition: all 0.3s ease 0s;
-      background: #000000;
-   }
-   &::before,
-   &::after{
-      content:"";
-   }
-   &::before{
-      top: 0;
-   }
-   &::after{
-      bottom: 0;
-   }
-   span{
-      top: 50%;
-      transform: scale(1) translate(0px, -50%);
-   }
-  }
-  .header-info__busket{
-  }
-  .header-info__login{
-    
+  .burger-menu {
+    display: block;
   }
 }
 </style>

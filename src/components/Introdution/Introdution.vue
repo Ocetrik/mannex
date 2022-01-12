@@ -10,9 +10,15 @@
           <div class="catalog-button__info">Более 50 товаров</div>
         </div>
       </div>
-      <div class="introdution__picture">
-        <introSlider
-        :slider_data="sliderItems" />
+      <div
+        class="introdution__picture">
+        <introSlider :slider_data="sliderItems" />
+        <button @click="prevSlide" class="slider-btn-p">
+          <img src="@/static/intro-prev.png" alt="" />
+        </button>
+        <button @click="nextSlide" class="slider-btn-n">
+          <img src="@/static/intro-next.png" alt="" />
+        </button>
       </div>
     </div>
     <div class="introdution-buttons">
@@ -28,23 +34,52 @@
 </template>
 
 <script>
-import introSlider from '@/components/Introdution/Slider/intro-slider.vue';
+import introSlider from "@/components/Introdution/Slider/intro-slider.vue";
 
 export default {
-  components: { 
-    introSlider
-    },
-  name: 'Introdution',
-    data: () => ({
+  components: {
+    introSlider,
+  },
+  name: "Introdution",
+  data: () => ({
     sliderItems: [
-      {id: 1, name: 'Шины', img:'@/static/intro-product.png'},
-      {id: 2, name: 'Диски', img:'@/static/disk.jpg'}
-    ]
+      { id: 1, name: "Шины", img: require("@/static/intro-product.png") },
+      { id: 2, name: "Диски", img: require("@/static/intro-disk.png") },
+    ],
+    currentSlideIndex: 0,
   }),
+  methods: {
+    prevSlide() {
+      if (this.nextSlide > 0) {
+        this.currentSlideIndex--;
+      }
+    },
+    nextSlide() {
+      if (this.currentSlideIndex > this.slider_data.length - 1) {
+        this.currentSlideIndex = 0;
+      } else {
+        this.currentSlideIndex++;
+      }
+    },
+  },
 };
 </script>
 
 <style lang='scss' scoped>
+.slider-btn-p {
+  position: absolute;
+  bottom: 80px;
+  padding: 13px;
+  background: #ffffff;
+  border: 1px solid;
+}
+.slider-btn-n {
+  position: absolute;
+  bottom: 80px;
+  left: 69px;
+  padding: 14px;
+  background: #4ba9ff;
+}
 .introdution {
   padding-bottom: 150px;
   max-width: 1440px;
@@ -93,11 +128,13 @@ export default {
 }
 .introdution__picture {
   max-width: 520px;
+  position: relative;
+  transition: all ease 0.5s;
 }
 .introdution-buttons {
   display: flex;
   gap: 15px;
-  margin-top: -30px;
+  // margin-top: -30px;
 }
 .button {
   padding: 41px 88px;
@@ -115,18 +152,24 @@ export default {
     border-radius: 15px;
   }
 }
-@media screen and (max-width: 1000px) {
-  .introdution-buttons{
+@media screen and (max-width: 1100px) {
+  .introdution-buttons {
     flex-direction: column;
     max-width: 470px;
     margin: 0 auto;
     margin-top: 50px;
   }
+  .introdution-info{
+    flex-direction: column;
+  }
+  .introdution__picture{
+    margin: 0 auto;
+  }
 }
 @media screen and (max-width: 750px) {
-  .catalog__text{
+  .catalog__text {
     font-size: 50px;
     line-height: 60px;
-  }  
+  }
 }
 </style>

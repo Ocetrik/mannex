@@ -18,6 +18,8 @@
 </template>
 
 <script>
+import { STATIC_PRODUCT } from "@/data/STATIC_PRODUCT.js";
+
 export default {
   props: {
     disableTerminal:{

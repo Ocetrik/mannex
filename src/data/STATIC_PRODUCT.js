@@ -5,7 +5,8 @@ export const STATIC_PRODUCT = [
     size: 20,
     diameter: 15,
     season: 'Летние',
-    img: require('@/static/product.png')
+    img: require('@/static/product.png'),
+    price: 228
   },
   {
     title: "Pirelli", description: "Шина зимняя Pirelli", size: 20,

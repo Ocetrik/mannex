@@ -8,7 +8,7 @@
       <div class="cart-item">
         <catalog-cart
           :disableTerminal="true"
-          v-for="(item, key) in getBasket"
+          v-for="(item, key) in carts"
           :key="key"
           :product="item"
           :description="item.description"
@@ -17,20 +17,26 @@
         />
       </div>
       <div v-if="!getBasket.length" class="cart-empty">
-        <div class="cart-empty__pic"><img src="@/static/empty_png.png" alt=""></div>
-        <div class="cart-empty__text">Пока что здесь ничего нет, перейдите в каталог и добавьте интересующий товар</div>
+        <div class="cart-empty__pic">
+          <img src="@/static/empty_png.png" alt="" />
+        </div>
+        <div class="cart-empty__text">
+          Пока что здесь ничего нет, перейдите в каталог и добавьте интересующий
+          товар
+        </div>
       </div>
-      <div class="cart-pages">
-        <div class="cart-pages__item"
-        v-for="(pagesItem, key) in new Array(numberOfPages)"
-        :key="key"
+      <div v-if="numberOfPages > 1" class="cart-pages">
+        <div
+          class="cart-pages__item"
+          v-for="(pagesItem, key) in (numberOfPages)"
+          :key="key"
           :class="openPage === key ? 'active' : ''"
           @click="openPage = key"
         >
-          
+          {{ key + 1 }}
         </div>
       </div>
-      <div class="cart-summ">Итог: {{summPrice}}р.</div>
+      <div class="cart-summ">Итог: {{ summPrice }}р.</div>
       <button class="cart-btn">Оплатить</button>
     </div>
     <div class="basket-footer">
@@ -50,10 +56,9 @@ export default {
     Footer,
   },
   data: () => ({
-    openPage: 0
+    openPage: 0,
   }),
-  props: {
-  },
+  props: {},
   computed: {
     summPrice() {
       return this.$store.getters.GET_SUMM_PRICE;
@@ -63,24 +68,41 @@ export default {
     },
     carts() {
       if (this.openPage === 0) {
-        return this.getBasket.object.slice(0, 6);
+        return this.getBasket.slice(0, 6);
       } else {
-        return this.getBasket.slice(
-          this.openPage * 6,
-          this.openPage * 6 + 6
-        );
+        return this.getBasket.slice(this.openPage * 6, this.openPage * 6 + 6);
       }
     },
     numberOfPages() {
       return Math.ceil(this.getBasket.length / 6);
     },
   },
-  methods: {
-  }
+  methods: {},
 };
 </script>
 
 <style scoped lang="scss">
+.cart-pages__item {
+  padding: 10px 17px;
+}
+.cart-pages {
+  font-family: "Gilroy-Bold";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 29px;
+  margin-top: 60px;
+  padding-bottom: 61px;
+  display: flex;
+  justify-content: center;
+}
+.active {
+  background: #4ba9ff;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .basket {
   margin: 0 auto;
 }
@@ -146,13 +168,28 @@ export default {
   text-align: center;
   margin-top: 60px;
 }
-.cart-empty__text {color: rgba(75, 169, 255, 0.5);font-family: 'Gilroy-Regular';
-font-style: normal;
-font-weight: normal;
-font-size: 24px;
-line-height: 28px;
-text-align: center;
-max-width: 500px;
-margin: 0 auto;
+.cart-empty__text {
+  color: rgba(75, 169, 255, 0.5);
+  font-family: "Gilroy-Regular";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 28px;
+  text-align: center;
+  max-width: 500px;
+  margin: 0 auto;
+}
+@media screen and (max-width: 1250px) {
+  .cart-item {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (max-width: 950px) {
+  .cart-item {
+    grid-template-columns: repeat(1, 1fr);
+    padding-left: 0;
+    margin: 0 auto;
+    margin-top: 50px;
+  }
 }
 </style>

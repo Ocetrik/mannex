@@ -24,7 +24,6 @@ export default {
     Introdution,
     Header,
     Footer,
-    
   }
 }
 </script>
