@@ -1,7 +1,7 @@
 <template>
   <div class="catalog">
     <!-- <div class="bgimg-1"><img src="@/static/catalogbg.png" alt="" /></div> -->
-    <div class="bgimg-2"><img src="@/static/catalogbg-2.png" alt="" /></div>
+    <!-- <div class="bgimg-2"><img src="@/static/catalogbg-2.png" alt="" /></div> -->
     <div class="content-container">
       <div class="catalog-title">Каталог</div>
       <!-- Выбор категории товаров -->

@@ -43,7 +43,11 @@ export default {
 
 }
 .burger-items{
-  position: relative;
+  position: fixed;
+  left: 0;
+  top: 0;
+  padding-right: 50px;
+  color: #ffffff;
 }
 .header-info__burger {
   z-index: 5;

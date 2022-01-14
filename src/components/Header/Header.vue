@@ -9,7 +9,7 @@
       <div class="header-info__navigator">
         <div class="navigator__item text">Главная</div>
         <div class="navigator__item text">Pro-Запрос</div>
-        <div class="navigator__item text">Гараж</div>
+        <router-link to="/garage" class="navigator__item text">Гараж</router-link>
         <div class="navigator__item text">Контакты</div>
         <div class="navigator__item text">Заказы</div>
       </div>
@@ -37,12 +37,17 @@
       />
       <button class="header-search__send text">Поиск</button>
     </div>
+    <!-- <div class="modal-layer"></div> -->
   </div>
 </template>
 
 <script>
+import ROUTER_PATH from "@/data/ROUTER_PATH.js";
 import burgerMenu from "./Burger/burger-menu.vue";
 export default {
+  props: {
+    items: { type: Object, required: true },
+  },
   components: { burgerMenu },
   computed: {
     summPrice() {
@@ -54,6 +59,18 @@ export default {
 </script>
 
 <style scoped lang='scss'>
+.modal-layer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  background: rgba(0,0,0,0.9);
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
 .header-info {
   display: flex;
   justify-content: space-between;
