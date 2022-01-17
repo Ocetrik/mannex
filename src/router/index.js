@@ -27,6 +27,20 @@ export default new Router({
       meta: {layout: 'main'},
       component: () => import('@/views/Garage.vue'),
       props: true
+    },
+    {
+      path: '/login',
+      name: 'login',
+      meta: {layout: 'main'},
+      component: () => import('@/views/Login.vue'),
+      props: true
+    },
+    {
+      path: '/register',
+      name: 'register',
+      meta: {layout: 'main'},
+      component: () => import('@/views/Register.vue'),
+      props: true
     }
   ]
 })

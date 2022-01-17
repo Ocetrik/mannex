@@ -19,13 +19,13 @@
         /></router-link>
         <div class="busket__summ text">{{ summPrice }}</div>
       </div>
-      <a href="#" class="header-info__login">
+      <router-link to="/login" class="header-info__login">
         <div class="login__user">
           <img src="@/static/login-user.png" alt="" />
         </div>
         <div class="login__btn text">Войти</div>
-      </a>
-      <div :class="{ active: !isVisible }" class="burger-menu">
+      </router-link>
+      <div class="burger-menu">
         <burger-menu />
       </div>
     </div>
@@ -45,9 +45,6 @@
 import ROUTER_PATH from "@/data/ROUTER_PATH.js";
 import burgerMenu from "./Burger/burger-menu.vue";
 export default {
-  props: {
-    items: { type: Object, required: true },
-  },
   components: { burgerMenu },
   computed: {
     summPrice() {
@@ -138,6 +135,7 @@ export default {
 }
 .burger-menu {
   display: none;
+  padding-top: 8px;
 }
 
 @media screen and (max-width: 1100px) {

@@ -3,12 +3,12 @@
     <span></span>
     <div class="burger-items text">
       <div
-        v-for="item in items"
-        :key="item"
-        v-show="isVisible"
+        v-for="(i,key) in items"
+        :key="key"
+        v-show="!isVisible"
         class="burger-items__item"
       >
-        {{ item.name }}
+        {{ i.name }}
       </div>
     </div>
   </div>
@@ -17,13 +17,11 @@
 <script>
 export default {
   props: {
-    isVisible: {
-      type: Boolean,
-      default: false,
-    },
   },
-  components: {},
-  methods: {},
+  components: {
+  },
+  methods: {
+  },
   data: () => ({
     items: [
       { name: "Главная" },
@@ -31,7 +29,9 @@ export default {
       { name: "Гараж" },
       { name: "Контакты" },
       { name: "Заказы" },
+      { name: "Заказы" },
     ],
+    isVisible: true
   }),
 };
 </script>
@@ -40,14 +40,13 @@ export default {
 .burger-items__item {
   width: 100px;
   padding-top: 20px;
-
 }
 .burger-items{
   position: fixed;
   left: 0;
   top: 0;
   padding-right: 50px;
-  color: #ffffff;
+  color: #000000;
 }
 .header-info__burger {
   z-index: 5;
