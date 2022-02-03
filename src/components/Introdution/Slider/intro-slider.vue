@@ -3,9 +3,7 @@
     class="intro-slider"
   >
     <introSliderItem
-      v-for="item in slider_data"
-      :key="item.id"
-      :item_data="item"
+      :item_data="slider_data[countShowItem]"
     />
   </div>
 </template>
@@ -23,6 +21,12 @@ export default {
       type: Array,
       default: () => [],
     },
+
+    countShowItem: {
+      type: Number,
+      default: 0,
+      required: true
+    }
   },
 };
 </script>

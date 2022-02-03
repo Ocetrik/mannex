@@ -12,7 +12,7 @@
       </div>
       <div
         class="introdution__picture">
-        <introSlider :slider_data="sliderItems" />
+        <introSlider :slider_data="sliderItems" :count-show-item="currentSlideIndex"/>
         <button @click="prevSlide" class="slider-btn-p">
           <img src="@/static/intro-prev.png" alt="" />
         </button>
@@ -50,15 +50,17 @@ export default {
   }),
   methods: {
     prevSlide() {
-      if (this.nextSlide > 0) {
+      if (this.currentSlideIndex > 0) {
         this.currentSlideIndex--;
+      } else {
+        this.currentSlideIndex = this.sliderItems.length - 1
       }
     },
     nextSlide() {
-      if (this.currentSlideIndex > this.slider_data.length - 1) {
+      if (this.currentSlideIndex > this.sliderItems.length - 1) {
         this.currentSlideIndex = 0;
       } else {
-        this.currentSlideIndex++;
+        this.currentSlideIndex++
       }
     },
   },
